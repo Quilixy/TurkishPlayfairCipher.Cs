@@ -15,23 +15,26 @@ To begin with Playfair cipher, a key matrix is generated. This matrix is typical
 * If the length of the text is odd, an "X" (or another character, depending on implementation) is added to make it even.
 
 3. Dividing the Text into Pairs:
-* The text is divided into pairs of letters for encryption. If the text is "HELLO", it would become:
-* "HE", "LL", "OX"
+The text is divided into pairs of letters for encryption. If the text is "HELLO", it would become:
+```
+"HE", "LL", "OX"
+```
 > If the same letter appears twice consecutively, it is replaced by a different letter (like "X").
 
 4. Encryption Rules:
-* The encryption works according to three main rules:
+The encryption works according to three main rules:
 * Same Row: If the two letters are in the same row of the matrix, each letter is replaced by the letter to its immediate right. If it's the last letter of the row, it wraps around to the first letter of that row.
 * Same Column: If the two letters are in the same column, each letter is replaced by the letter immediately below it. If it's the last letter in the column, it wraps around to the top.
 * Different Row and Column: If the letters are neither in the same row nor column, they are replaced with the letters at the opposite corners of the rectangle formed by the two letters.
 
 5. Decryption:
-* The decryption process is essentially the reverse of encryption:
+The decryption process is essentially the reverse of encryption:
 * Same row: Letters are shifted left.
 * Same column: Letters are shifted up.
 * Different row and column: The letters are swapped back to their original positions.
 
 ### 📝 Example:
+```
 Let's say the text to encrypt is "HELLO" and the key word is "KEY".
 
 Step 1: Generate the 6x6 Playfair matrix from the keyword "KEY".
@@ -42,6 +45,7 @@ Step 2: Split the text into pairs:
 Step 3: Apply the encryption rules for each pair.
 
 Step 4: The final encrypted text is obtained.
+```
 
 ### 🔄 Decryption:
 The same rules are applied in reverse to decrypt the message.
