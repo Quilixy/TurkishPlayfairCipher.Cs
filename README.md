@@ -1,53 +1,60 @@
-﻿# Turkish Playfair Cipher with .NET MAUI
+Turkish Playfair Cipher with .NET MAUI
+Alphabet:
+A B C Ç D E F G Ğ H I İ J K L M N O Ö P R S Ş T U Ü V Y Z X W Q ( ) . ,
 
-Alphabet = A B C Ç D E F G Ğ H I İ J K L M N O Ö P R S Ş T U Ü V Y Z X W Q ( ) . ,
+🔐 What is Playfair Cipher and How Does It Work?
+Playfair Cipher is an encryption algorithm developed by Charles Wheatstone in the 19th century. It uses a Digraph (pair of letters) encryption technique to ensure secure communication. Unlike simpler encryption methods like the Caesar Cipher, Playfair encrypts text in pairs and applies specific rules to encrypt those pairs, offering a stronger encryption.
 
-## 🔐 Playfair Şifresi Nedir ve Nasıl Çalışır?
+🚀 How Does Playfair Cipher Work?
+1. Creating the Key Matrix:
+To begin with Playfair cipher, a key matrix is generated. This matrix is typically a 5x5 grid, but in this project, a 6x6 matrix is used. The key matrix is constructed by following these steps:
 
-**Playfair Şifresi**, 19. yüzyılda Charles Wheatstone tarafından geliştirilmiş bir şifreleme algoritmasıdır. Bu algoritma, özellikle **Çift Harf (Digraph)** şifreleme tekniğini kullanarak güvenli iletişim sağlamak için tasarlanmıştır. Playfair, metni çiftler halinde şifreler ve bu çiftleri şifrelerken belirli kurallar uygular. Bu, klasik **Caesar Cipher** gibi basit şifreleme yöntemlerine göre daha güçlü bir şifreleme sağlar.
+Remove repeating letters from the key.
+If the number of unique letters is less than 25 (for a 5x5 matrix), the remaining spaces are filled alphabetically. Since this project uses a 6x6 matrix, more characters (such as Turkish characters and special symbols like ., ,, (), etc.) are accommodated.
+2. Preparing the Text:
+The text is written in uppercase with spaces removed.
+If the length of the text is odd, an "X" (or another character, depending on implementation) is added to make it even.
+3. Dividing the Text into Pairs:
+The text is divided into pairs of letters for encryption. If the text is "HELLO", it would become:
 
-### **Playfair Şifresi Nasıl Çalışır?**
+arduino
+Kopyala
+Düzenle
+"HE", "LL", "OX"
+If the same letter appears twice consecutively, it is replaced by a different letter (like "X").
 
-1. **Anahtar Matrisi Oluşturma:**
-   Playfair şifresi için önce bir **anahtar matrisi** oluşturulması gerekir. Bu matris, **5x5**'lik bir ızgara şeklinde düzenlenir (ancak bu projede **6x6** kullanılmıştır). Anahtar metnindeki her harf, bu matrise yerleştirilir. Türkçe karakterler (Ç, Ş, İ, Ü, Ö, Ğ, vb.) ve özel karakterler (. , ( ) ) da bu matrisin içine eklenir.
+4. Encryption Rules:
+The encryption works according to three main rules:
 
-   - Anahtar metnindeki tekrarlayan harfler çıkarılır.
-   - Eğer harf sayısı 25'ten azsa (5x5 matris için), geri kalan yerler alfabetik sırayla doldurulur. Bu projede ise 6x6 bir matris kullanıldığı için daha fazla karakter kullanılabilir.
+Same Row: If the two letters are in the same row of the matrix, each letter is replaced by the letter to its immediate right. If it's the last letter of the row, it wraps around to the first letter of that row.
 
-2. **Metnin Hazırlanması:**
-   Şifrelenecek metin, **büyük harflerle** yazılır ve boşluklar kaldırılır. Eğer metnin uzunluğu tek sayıda ise, sonuna **"X"** harfi eklenir (bazı uygulamalarda bu harf farklı olabilir).
+Same Column: If the two letters are in the same column, each letter is replaced by the letter immediately below it. If it's the last letter in the column, it wraps around to the top.
 
-3. **Metnin Çiftlere Ayrılması:**
-   Şifreleme işlemi için metin, **iki harflik çiftler** halinde gruplara ayrılır. Örneğin, "HELLO" kelimesi "HE", "LL", "OX" şeklinde ayrılır. Eğer aynı harf iki kez ardışık olarak gelirse, ikinci harf yerine başka bir harf (örneğin, "X") eklenir.
+Different Row and Column: If the letters are neither in the same row nor column, they are replaced with the letters at the opposite corners of the rectangle formed by the two letters.
 
-4. **Şifreleme Kuralları:**
-   Şifreleme işlemi için üç temel kural vardır:
+5. Decryption:
+The decryption process is essentially the reverse of encryption:
 
-   - **Aynı Satırda Olan Harfler:** Eğer iki harf aynı satırda ise, her bir harf bir sonraki sütuna taşınır (matrisin sonuna gelindiğinde, başa dönülür).
-   - **Aynı Sütunda Olan Harfler:** Eğer iki harf aynı sütunda ise, her bir harf bir sonraki satıra taşınır (matrisin sonuna gelindiğinde, başa dönülür).
-   - **Farklı Satır ve Sütundaki Harfler:** Eğer harfler hem farklı satırda hem de farklı sütunda ise, her bir harf karşılıklı olan iki harfin bulunduğu pozisyonları değiştirir. Yani, bir harf diğer harfin bulunduğu satırda ve sütunda yer alacak şekilde yer değiştirilir.
+Same row: Letters are shifted left.
+Same column: Letters are shifted up.
+Different row and column: The letters are swapped back to their original positions.
+📝 Example:
+Let's say the text to encrypt is "HELLO" and the key word is "KEY".
 
-5. **Şifre Çözme:**
-   Şifre çözme işlemi de şifrelemeye benzer şekilde yapılır, ancak kurallar tersine uygulanır:
-   
-   - Aynı satırdaki harfler, bir öncekine doğru kaydırılır.
-   - Aynı sütundaki harfler, bir önceki satıra kaydırılır.
-   - Farklı satır ve sütundaki harfler, yine karşılıklı yer değiştirilir.
+Step 1: Generate the 6x6 Playfair matrix from the keyword "KEY".
 
-### **Örnek Uygulama:**
+Step 2: Split the text into pairs:
+"HE", "LL", "OX"
 
-Diyelim ki şifrelenecek metin **"HELLO"** ve anahtar kelimesi **"KEY"**. Anahtar kelimesiyle 6x6'lık bir Playfair matrisi oluşturduktan sonra, "HELLO" metni şu adımlarla şifrelenir:
+Step 3: Apply the encryption rules for each pair.
 
-- **Adım 1:** Anahtar matrisi oluşturulur.
-- **Adım 2:** Metin "HE", "LL", "OX" olarak çiftlere ayrılır.
-- **Adım 3:** Şifreleme kurallarına göre her bir çift şifrelenir.
-- **Adım 4:** Sonuçta, şifreli metin elde edilir.
+Step 4: The final encrypted text is obtained.
 
-Playfair şifresi, şifre çözme işlemi için de aynı kuralları tersine uygular ve metni çözmenizi sağlar.
+🔄 Decryption:
+The same rules are applied in reverse to decrypt the message.
 
----
+💡 Why Playfair Cipher?
+Playfair Cipher is a classic encryption method that provides a stronger alternative to simpler techniques like Caesar Cipher. Although it’s no longer widely used today due to the development of more advanced encryption algorithms, it serves as an excellent tool for learning the fundamentals of cryptography.
 
-Bu şifreleme algoritması, güvenliği artırmak ve metinlerin şifrelenmesini kolaylaştırmak için yaygın bir şekilde kullanılmıştır. Ancak günümüzde daha güçlü şifreleme yöntemleri bulunmaktadır. Bu projede, temel şifreleme mantığını öğrenmek ve uygulamak amacıyla Playfair Şifresi seçilmiştir.
-
-
+This project is designed to demonstrate the basic encryption principles of the Playfair Cipher using the .NET MAUI framework, with support for Turkish characters and special symbols.
 
