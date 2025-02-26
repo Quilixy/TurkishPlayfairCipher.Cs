@@ -34,9 +34,8 @@ The decryption process is essentially the reverse of encryption:
 * Different row and column: The letters are swapped back to their original positions.
 
 ### 📝 Example:
-```
 Let's say the text to encrypt is "HELLO" and the key word is "KEY".
-
+```
 Step 1: Generate the 6x6 Playfair matrix from the keyword "KEY".
 
 Step 2: Split the text into pairs:
