@@ -54,7 +54,7 @@ public partial class MainPage : ContentPage
 			}
 		}
 
-		// Safeguard: throw an exception if the letter isn't found
+		
 		throw new ArgumentOutOfRangeException($"Character '{letter}' not found in matrix.");
 	}
 
@@ -96,7 +96,7 @@ public partial class MainPage : ContentPage
 		char[,] matrix = GeneratePlayfairMatrix(key);
 		string result = "";
 
-		// Ensure the text length is even
+		
 		if (text.Length % 2 != 0)
 			text += 'X';
 
