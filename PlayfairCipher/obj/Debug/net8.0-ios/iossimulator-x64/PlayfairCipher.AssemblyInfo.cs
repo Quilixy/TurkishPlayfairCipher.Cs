@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PlayfairCipher")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+051c0679865139406172c5555f47286fe155d6b9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+cb3db4f4733c934eb656654d88ebcb95e49a1e72")]
 [assembly: System.Reflection.AssemblyProductAttribute("PlayfairCipher")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PlayfairCipher")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

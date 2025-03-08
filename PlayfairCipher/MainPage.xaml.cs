@@ -15,14 +15,20 @@ public partial class MainPage : ContentPage
     {
         string text = InputText.Text.ToUpper();
         string key = KeyText.Text.ToUpper();
+        char[,] matrix = GeneratePlayfairMatrix(key);
+
         ResultLabel.Text = PlayfairEncrypt(text, key);
+        MatrixLabel.Text = GenerateMatrixString(matrix);
     }
 
     private void Decrypt_Clicked(object sender, EventArgs e)
     {
         string text = InputText.Text.ToUpper();
         string key = KeyText.Text.ToUpper();
+        char[,] matrix = GeneratePlayfairMatrix(key);
+        
         ResultLabel.Text = PlayfairDecrypt(text, key);
+        MatrixLabel.Text = GenerateMatrixString(matrix);
     }
 
     private static char[,] GeneratePlayfairMatrix(string key)
@@ -123,4 +129,19 @@ public partial class MainPage : ContentPage
 		}
 		return result;
 	}
+
+    private static string GenerateMatrixString(char[,] matrix)
+    {
+        string result = "";
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                result += matrix[i, j] + " ";
+            }
+            result += "\n"; // Her satırdan sonra yeni bir satıra geç
+        }
+        return result;
+    }
+
 }

@@ -402,7 +402,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-.idea/
+.idea
 
 ##
 ## Visual studio for Mac
@@ -427,6 +427,9 @@ test-results/
 *.app
 
 # content below from: https://github.com/github/gitignore/blob/main/Global/macOS.gitignore
+
+# content below from: https://github.com/github/gitignore/blob/master/Global/macOS.gitignore
+
 # General
 .DS_Store
 .AppleDouble
